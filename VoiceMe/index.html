@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--    TODO double check the title-->
+    <title>Supplementary material from VoiceMe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans", roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", sans-serif !important;
+    }
+
+    #speakernet_container .collapse:not(.show) {
+        display: block;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .collapse_url {
+        display: list-item;
+        cursor: pointer;
+        list-style: inside disclosure-closed;
+        text-decoration: none;
+    }
+
+    .video {
+        width: 256px;
+        float: left;
+    }
+
+    .table video {
+        width: 100px;
+    }
+
+    .video-banner video {
+        height: 192px;
+    }
+
+    #teaser_button {
+        position: absolute;
+        margin-left: -200px;
+        margin-top: -20px;
+        font-family: 'Permanent Marker', cursive;
+        font-size: 1.4em;
+    }
+</style>
+<div class="container">
+    <h1 class="display-5 fw-normal">Supplementary Material</h1>
+
+    <hr>
+    <div class="video-banner">
+        <video class="on_hover teaser">
+            <source src="media/videos/bonus/net123_iter10.mp4" type="video/mp4">
+        </video>
+        <video class="on_hover teaser">
+            <source src="media/videos/bonus/net124_iter10.mp4" type="video/mp4">
+        </video>
+        <video class="on_hover teaser">
+            <source src="media/videos/bonus/net126_iter10.mp4" type="video/mp4">
+        </video>
+        <video class="on_hover teaser">
+            <source src="media/videos/bonus/net127_iter10.mp4" type="video/mp4">
+        </video>
+        <video class="on_hover teaser">
+            <source src="media/videos/bonus/net128_iter10.mp4" type="video/mp4">
+        </video>
+        <video class="on_hover teaser">
+            <source src="media/videos/bonus/net129_iter10.mp4" type="video/mp4">
+        </video>
+        <video class="on_hover teaser">
+            <source src="media/videos/bonus/net130_iter10.mp4" type="video/mp4">
+        </video>
+
+        <span id="teaser_button"><mark>Click on the videos to play</mark></span>
+    </div>
+    <hr class="mb-4">
+
+    <!--    TODO Insert link -->
+    <!--    <div><b>Paper:</b> <a>arXiv</a></div>-->
+    <!--    TODO Double check the title -->
+    <h6 class="display-5">VoiceMe: Personalized voice generation in TTS</h6>
+    <div class="h4 fw-normal">Pol van Rijn, Silvan Mertes, Dominik Schiller, Piotr Dura, Hubert Siuzdak, Peter M. C.
+        Harrison, Elisabeth André, Nori Jacoby
+    </div>
+
+    <!--    TODO Double check the abstract -->
+    <blockquote class="blockquote">
+        <p>Novel text-to-speech systems can generate entirely new voices that were not seen during
+            training. However, it remains a difficult task to efficiently create personalized voices from a high
+            dimensional
+            speaker space. In this work, we use speaker embeddings from a state-of-the-art speaker verification model
+            (SpeakerNet) trained on thousands of speakers to condition a TTS model. We employ a human sampling paradigm
+            to
+            explore this speaker latent space. We show that users can create voices that fit well to photos of faces,
+            art
+            portraits, and cartoons. We recruit online participants to collectively manipulate the voice of a speaking
+            face.
+            We show that (1) a separate group of human raters confirms that the created voices match the faces, (2)
+            speaker
+            gender apparent from the face is well-recovered in the voice, and (3) people are consistently moving towards
+            the
+            real voice prototype for the given face. Our results demonstrate that this technology can be applied in a
+            wide
+            number of applications including character voice development in audiobooks and games, personalized speech
+            assistants, and individual voices for people with speech impairment.</p>
+    </blockquote>
+    <div>
+    </div>
+
+    <hr class="my-5">
+
+    <div>
+        <div class="row my-3" id="speakernet_container">
+            <a name="speakernet"><h3>Speakernet embeddings</h3></a>
+            <p>Speakernet embeddings do not capture prosodic features such as rhythm or pitch variation, but general
+                voice
+                characteristics such as timbre and mean pitch. Here, we show the original speech samples extracted from
+                the
+                videos and the resynthesized version using the extracted speaker embedding from the reference.</p>
+            <div class="collapse" id="collapseTable">
+                <div id="table"></div>
+            </div>
+            <a data-bs-toggle="collapse" class="collapse_url" href="#collapseTable" role="button"
+               aria-expanded="false" aria-controls="collapseTable" data-bs-dismiss="collapse_url">
+                Show/hide all examples
+            </a>
+        </div>
+        <hr class="my-5">
+
+        <h3>Five example chains</h3>
+        <table class="table">
+            <tr>
+                <th>Iteration 0</th>
+                <th>Iteration 2</th>
+                <th>Iteration 4</th>
+                <th>Iteration 6</th>
+                <th>Iteration 8</th>
+                <th>Iteration 10</th>
+                <th>Iteration 22</th>
+            </tr>
+
+            <tr>
+                <td><video class="on_hover"><source src="media/videos/chains/net118_iter0.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net118_iter2.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net118_iter4.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net118_iter6.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net118_iter8.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net118_iter10.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net118_iter22.mp4" type="video/mp4"></video></td>
+            </tr>
+            <tr>
+                <td><video class="on_hover"><source src="media/videos/chains/net55_iter0.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net55_iter2.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net55_iter4.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net55_iter6.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net55_iter8.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net55_iter10.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net55_iter22.mp4" type="video/mp4"></video></td>
+            </tr>
+            <tr>
+                <td><video class="on_hover"><source src="media/videos/chains/net14_iter0.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net14_iter2.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net14_iter4.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net14_iter6.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net14_iter8.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net14_iter10.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net14_iter22.mp4" type="video/mp4"></video></td>
+            </tr>
+            <tr>
+                <td><video class="on_hover"><source src="media/videos/chains/net21_iter0.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net21_iter2.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net21_iter4.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net21_iter6.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net21_iter8.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net21_iter10.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net21_iter22.mp4" type="video/mp4"></video></td>
+            </tr>
+            <tr>
+                <td><video class="on_hover"><source src="media/videos/chains/net113_iter0.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net113_iter2.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net113_iter4.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net113_iter6.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net113_iter8.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net113_iter10.mp4" type="video/mp4"></video></td>
+                <td><video class="on_hover"><source src="media/videos/chains/net113_iter22.mp4" type="video/mp4"></video></td>
+            </tr>
+        </table>
+
+        <hr class="my-5">
+
+        <h3>Final iterations</h3>
+        <div id="final_iterations"></div>
+
+
+        <script>
+            function stringToHTML(str) {
+                var dom = document.createElement('div');
+                dom.innerHTML = str;
+                return dom;
+            }
+
+            // Audio examples
+            var out = '    <table class="table">\n' +
+                '        <tr>\n' +
+                '            <th>Speaker</th>\n' +
+                '            <th>Original recording</th>\n' +
+                '            <th>Reconstructed voice</th>\n' +
+                '        </tr>\n'
+            for (var i = 1; i <= 24; i++) {
+                out += '        <tr>\n';
+                out += '            <td>' + i + '</td>\n';
+                var speaker_padded = String(i).padStart(2, '0');
+                out += '            <td><audio controls="" preload="none"><source src="media/audio/real/n_speaker' + speaker_padded + '.wav"></audio></td>\n';
+                out += '            <td><audio controls="" preload="none"><source src="media/audio/reconstruction/n_speaker' + speaker_padded + '_reconstruction.wav"></audio></td>\n';
+                out += '        </tr>\n';
+            }
+            out += '    </table>'
+            document.getElementById('table').append(stringToHTML(out))
+
+            function addEventListenerList(list, event, fn) {
+                for (var i = 0, len = list.length; i < len; i++) {
+                    list[i].addEventListener(event, fn, false);
+                }
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            var urls = ['net53_iter22.mp4', 'net3_iter22.mp4', 'net6_iter22.mp4', 'net8_iter22.mp4', 'net10_iter22.mp4', 'net11_iter22.mp4', 'net12_iter22.mp4', 'net13_iter22.mp4', 'net14_iter22.mp4', 'net16_iter22.mp4', 'net17_iter22.mp4', 'net18_iter22.mp4', 'net19_iter22.mp4', 'net21_iter22.mp4', 'net22_iter22.mp4', 'net23_iter22.mp4', 'net24_iter22.mp4', 'net25_iter22.mp4', 'net26_iter22.mp4', 'net27_iter22.mp4', 'net28_iter22.mp4', 'net30_iter22.mp4', 'net31_iter22.mp4', 'net33_iter22.mp4', 'net34_iter22.mp4', 'net36_iter22.mp4', 'net38_iter22.mp4', 'net39_iter22.mp4', 'net40_iter22.mp4', 'net43_iter22.mp4', 'net44_iter22.mp4', 'net46_iter22.mp4', 'net47_iter22.mp4', 'net51_iter22.mp4', 'net52_iter22.mp4', 'net55_iter22.mp4', 'net58_iter22.mp4', 'net59_iter22.mp4', 'net60_iter22.mp4', 'net61_iter22.mp4', 'net62_iter22.mp4', 'net63_iter22.mp4', 'net64_iter22.mp4', 'net66_iter22.mp4', 'net67_iter22.mp4', 'net69_iter22.mp4', 'net70_iter22.mp4', 'net71_iter22.mp4', 'net72_iter22.mp4', 'net73_iter22.mp4', 'net74_iter22.mp4', 'net77_iter22.mp4', 'net78_iter22.mp4', 'net79_iter22.mp4', 'net80_iter22.mp4', 'net83_iter22.mp4', 'net84_iter22.mp4', 'net85_iter22.mp4', 'net86_iter22.mp4', 'net92_iter22.mp4', 'net93_iter22.mp4', 'net94_iter22.mp4', 'net99_iter22.mp4', 'net100_iter22.mp4', 'net101_iter22.mp4', 'net102_iter22.mp4', 'net105_iter22.mp4', 'net109_iter22.mp4', 'net111_iter22.mp4', 'net113_iter22.mp4', 'net115_iter22.mp4', 'net118_iter22.mp4', 'net121_iter22.mp4']
+            shuffleArray(urls)
+            urls.forEach(function (url) {
+                document.getElementById('final_iterations').append(stringToHTML('<video class="video on_hover"><source src="media/videos/gallery/' + url + '" type="video/mp4"></video>'))
+            })
+
+
+            addEventListenerList(document.getElementsByClassName('on_hover'), 'mouseover', function (x) {
+                console.log(x.srcElement.play())
+            })
+
+
+        </script>
+    </div>
+</div>
+</body>
+</html>
