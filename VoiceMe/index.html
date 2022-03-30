@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--    TODO double check the title-->
     <title>Supplementary material from VoiceMe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
@@ -36,11 +40,18 @@
 
     .video {
         width: 256px;
+        height: 256px;
         float: left;
     }
 
     .table video {
         width: 100px;
+    }
+
+    .table-div {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .video-banner video {
@@ -54,31 +65,65 @@
         font-family: 'Permanent Marker', cursive;
         font-size: 1.4em;
     }
+
+    @media (max-width: 768px) {
+        #teaser_button {
+            display: none;
+        }
+
+        .video-banner video, .video {
+            width: 100%;
+            height: auto;
+        }
+    }
 </style>
 <div class="container">
     <h1 class="display-5 fw-normal">Supplementary Material</h1>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="introModal" tabindex="-1" role="dialog" aria-labelledby="introModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="introModalLabel">Supplementary Material "VoiceMe: Personalized voice
+                        generation in TTS"</h5>
+                </div>
+                <div class="modal-body">
+                    This website was developed and tested with Google Chrome. We recommend you to view the site on your
+                    computer using Google Chrome. You can play videos by hovering over them.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="$('#introModal').modal('toggle')"
+                            data-dismiss="modal">Got it
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr>
     <div class="video-banner">
-        <video class="on_hover teaser">
+        <video fetchpriority="high" class="on_hover teaser">
             <source src="media/videos/bonus/net123_iter10.mp4" type="video/mp4">
         </video>
-        <video class="on_hover teaser">
+        <video fetchpriority="high" class="on_hover teaser">
             <source src="media/videos/bonus/net124_iter10.mp4" type="video/mp4">
         </video>
-        <video class="on_hover teaser">
+        <video fetchpriority="high" class="on_hover teaser">
             <source src="media/videos/bonus/net126_iter10.mp4" type="video/mp4">
         </video>
-        <video class="on_hover teaser">
+        <video fetchpriority="high" class="on_hover teaser">
             <source src="media/videos/bonus/net127_iter10.mp4" type="video/mp4">
         </video>
-        <video class="on_hover teaser">
+        <video fetchpriority="high" class="on_hover teaser">
             <source src="media/videos/bonus/net128_iter10.mp4" type="video/mp4">
         </video>
-        <video class="on_hover teaser">
+        <video fetchpriority="high" class="on_hover teaser">
             <source src="media/videos/bonus/net129_iter10.mp4" type="video/mp4">
         </video>
-        <video class="on_hover teaser">
+        <video fetchpriority="high" class="on_hover teaser">
             <source src="media/videos/bonus/net130_iter10.mp4" type="video/mp4">
         </video>
 
@@ -86,15 +131,12 @@
     </div>
     <hr class="mb-4">
 
-    <!--    TODO Insert link -->
     <!--    <div><b>Paper:</b> <a>arXiv</a></div>-->
-    <!--    TODO Double check the title -->
     <h6 class="display-5">VoiceMe: Personalized voice generation in TTS</h6>
     <div class="h4 fw-normal">Pol van Rijn, Silvan Mertes, Dominik Schiller, Piotr Dura, Hubert Siuzdak, Peter M. C.
         Harrison, Elisabeth André, Nori Jacoby
     </div>
 
-    <!--    TODO Double check the abstract -->
     <blockquote class="blockquote">
         <p>Novel text-to-speech systems can generate entirely new voices that were not seen during
             training. However, it remains a difficult task to efficiently create personalized voices from a high
@@ -129,7 +171,7 @@
                 the
                 videos and the resynthesized version using the extracted speaker embedding from the reference.</p>
             <div class="collapse" id="collapseTable">
-                <div id="table"></div>
+                <div class="table-div" id="table"></div>
             </div>
             <a data-bs-toggle="collapse" class="collapse_url" href="#collapseTable" role="button"
                aria-expanded="false" aria-controls="collapseTable" data-bs-dismiss="collapse_url">
@@ -139,64 +181,205 @@
         <hr class="my-5">
 
         <h3>Five example chains</h3>
-        <table class="table">
-            <tr>
-                <th>Iteration 0</th>
-                <th>Iteration 2</th>
-                <th>Iteration 4</th>
-                <th>Iteration 6</th>
-                <th>Iteration 8</th>
-                <th>Iteration 10</th>
-                <th>Iteration 22</th>
-            </tr>
+        <div class="table-div">
+            <table class="table table-responsive">
+                <tr>
+                    <th>Iteration 0</th>
+                    <th>Iteration 2</th>
+                    <th>Iteration 4</th>
+                    <th>Iteration 6</th>
+                    <th>Iteration 8</th>
+                    <th>Iteration 10</th>
+                    <th>Iteration 22</th>
+                </tr>
 
-            <tr>
-                <td><video class="on_hover"><source src="media/videos/chains/net118_iter0.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net118_iter2.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net118_iter4.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net118_iter6.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net118_iter8.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net118_iter10.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net118_iter22.mp4" type="video/mp4"></video></td>
-            </tr>
-            <tr>
-                <td><video class="on_hover"><source src="media/videos/chains/net55_iter0.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net55_iter2.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net55_iter4.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net55_iter6.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net55_iter8.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net55_iter10.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net55_iter22.mp4" type="video/mp4"></video></td>
-            </tr>
-            <tr>
-                <td><video class="on_hover"><source src="media/videos/chains/net14_iter0.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net14_iter2.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net14_iter4.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net14_iter6.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net14_iter8.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net14_iter10.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net14_iter22.mp4" type="video/mp4"></video></td>
-            </tr>
-            <tr>
-                <td><video class="on_hover"><source src="media/videos/chains/net21_iter0.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net21_iter2.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net21_iter4.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net21_iter6.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net21_iter8.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net21_iter10.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net21_iter22.mp4" type="video/mp4"></video></td>
-            </tr>
-            <tr>
-                <td><video class="on_hover"><source src="media/videos/chains/net113_iter0.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net113_iter2.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net113_iter4.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net113_iter6.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net113_iter8.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net113_iter10.mp4" type="video/mp4"></video></td>
-                <td><video class="on_hover"><source src="media/videos/chains/net113_iter22.mp4" type="video/mp4"></video></td>
-            </tr>
-        </table>
-
+                <tr>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net118_iter0.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net118_iter2.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net118_iter4.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net118_iter6.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net118_iter8.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net118_iter10.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net118_iter22.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net55_iter0.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net55_iter2.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net55_iter4.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net55_iter6.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net55_iter8.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net55_iter10.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net55_iter22.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net14_iter0.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net14_iter2.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net14_iter4.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net14_iter6.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net14_iter8.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net14_iter10.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net14_iter22.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net21_iter0.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net21_iter2.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net21_iter4.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net21_iter6.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net21_iter8.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net21_iter10.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net21_iter22.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net113_iter0.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net113_iter2.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net113_iter4.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net113_iter6.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net113_iter8.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net113_iter10.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td>
+                        <video class="on_hover">
+                            <source src="media/videos/chains/net113_iter22.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <hr class="my-5">
 
         <h3>Final iterations</h3>
@@ -221,8 +404,8 @@
                 out += '        <tr>\n';
                 out += '            <td>' + i + '</td>\n';
                 var speaker_padded = String(i).padStart(2, '0');
-                out += '            <td><audio controls="" preload="none"><source src="media/audio/real/n_speaker' + speaker_padded + '.wav"></audio></td>\n';
-                out += '            <td><audio controls="" preload="none"><source src="media/audio/reconstruction/n_speaker' + speaker_padded + '_reconstruction.wav"></audio></td>\n';
+                out += '            <td><audio style="width: 100px;" controls="" preload="none"><source src="media/audio/real/n_speaker' + speaker_padded + '.wav"></audio></td>\n';
+                out += '            <td><audio style="width: 100px;" controls="" preload="none"><source src="media/audio/reconstruction/n_speaker' + speaker_padded + '_reconstruction.wav"></audio></td>\n';
                 out += '        </tr>\n';
             }
             out += '    </table>'
@@ -244,17 +427,32 @@
             var urls = ['net53_iter22.mp4', 'net3_iter22.mp4', 'net6_iter22.mp4', 'net8_iter22.mp4', 'net10_iter22.mp4', 'net11_iter22.mp4', 'net12_iter22.mp4', 'net13_iter22.mp4', 'net14_iter22.mp4', 'net16_iter22.mp4', 'net17_iter22.mp4', 'net18_iter22.mp4', 'net19_iter22.mp4', 'net21_iter22.mp4', 'net22_iter22.mp4', 'net23_iter22.mp4', 'net24_iter22.mp4', 'net25_iter22.mp4', 'net26_iter22.mp4', 'net27_iter22.mp4', 'net28_iter22.mp4', 'net30_iter22.mp4', 'net31_iter22.mp4', 'net33_iter22.mp4', 'net34_iter22.mp4', 'net36_iter22.mp4', 'net38_iter22.mp4', 'net39_iter22.mp4', 'net40_iter22.mp4', 'net43_iter22.mp4', 'net44_iter22.mp4', 'net46_iter22.mp4', 'net47_iter22.mp4', 'net51_iter22.mp4', 'net52_iter22.mp4', 'net55_iter22.mp4', 'net58_iter22.mp4', 'net59_iter22.mp4', 'net60_iter22.mp4', 'net61_iter22.mp4', 'net62_iter22.mp4', 'net63_iter22.mp4', 'net64_iter22.mp4', 'net66_iter22.mp4', 'net67_iter22.mp4', 'net69_iter22.mp4', 'net70_iter22.mp4', 'net71_iter22.mp4', 'net72_iter22.mp4', 'net73_iter22.mp4', 'net74_iter22.mp4', 'net77_iter22.mp4', 'net78_iter22.mp4', 'net79_iter22.mp4', 'net80_iter22.mp4', 'net83_iter22.mp4', 'net84_iter22.mp4', 'net85_iter22.mp4', 'net86_iter22.mp4', 'net92_iter22.mp4', 'net93_iter22.mp4', 'net94_iter22.mp4', 'net99_iter22.mp4', 'net100_iter22.mp4', 'net101_iter22.mp4', 'net102_iter22.mp4', 'net105_iter22.mp4', 'net109_iter22.mp4', 'net111_iter22.mp4', 'net113_iter22.mp4', 'net115_iter22.mp4', 'net118_iter22.mp4', 'net121_iter22.mp4']
             shuffleArray(urls)
             urls.forEach(function (url) {
-                document.getElementById('final_iterations').append(stringToHTML('<video class="video on_hover"><source src="media/videos/gallery/' + url + '" type="video/mp4"></video>'))
+                document.getElementById('final_iterations').append(stringToHTML('<video fetchpriority="low" class="video on_hover"><source src="media/videos/gallery/' + url + '" type="video/mp4"></video>'))
             })
 
 
+            var last_video;
             addEventListenerList(document.getElementsByClassName('on_hover'), 'mouseover', function (x) {
-                console.log(x.srcElement.play())
+                if (!(last_video == null)) {
+                    last_video.pause()
+                    last_video.currentTime = 0
+                }
+                last_video = x.srcElement;
+                x.srcElement.play()
             })
-
-
         </script>
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+<script>
+    $(window).load(function () {
+        $('#introModal').modal('toggle')
+    });
+</script>
 </body>
 </html>
