@@ -67,6 +67,9 @@
     }
 
     @media (max-width: 768px) {
+        audio {
+            width: 100px;
+        }
         #teaser_button {
             display: none;
         }
@@ -79,6 +82,7 @@
 </style>
 <div class="container">
     <h1 class="display-5 fw-normal">Supplementary Material</h1>
+
 
 
     <!-- Modal -->
@@ -105,25 +109,25 @@
 
     <hr>
     <div class="video-banner">
-        <video fetchpriority="high" class="on_hover teaser">
+        <video fetchpriority="high" playsinline class="on_hover teaser">
             <source src="media/videos/bonus/net123_iter10.mp4" type="video/mp4">
         </video>
-        <video fetchpriority="high" class="on_hover teaser">
+        <video fetchpriority="high" playsinline class="on_hover teaser">
             <source src="media/videos/bonus/net124_iter10.mp4" type="video/mp4">
         </video>
-        <video fetchpriority="high" class="on_hover teaser">
+        <video fetchpriority="high" playsinline class="on_hover teaser">
             <source src="media/videos/bonus/net126_iter10.mp4" type="video/mp4">
         </video>
-        <video fetchpriority="high" class="on_hover teaser">
+        <video fetchpriority="high" playsinline class="on_hover teaser">
             <source src="media/videos/bonus/net127_iter10.mp4" type="video/mp4">
         </video>
-        <video fetchpriority="high" class="on_hover teaser">
+        <video fetchpriority="high" playsinline class="on_hover teaser">
             <source src="media/videos/bonus/net128_iter10.mp4" type="video/mp4">
         </video>
-        <video fetchpriority="high" class="on_hover teaser">
+        <video fetchpriority="high" playsinline class="on_hover teaser">
             <source src="media/videos/bonus/net129_iter10.mp4" type="video/mp4">
         </video>
-        <video fetchpriority="high" class="on_hover teaser">
+        <video fetchpriority="high" playsinline class="on_hover teaser">
             <source src="media/videos/bonus/net130_iter10.mp4" type="video/mp4">
         </video>
 
@@ -404,8 +408,8 @@
                 out += '        <tr>\n';
                 out += '            <td>' + i + '</td>\n';
                 var speaker_padded = String(i).padStart(2, '0');
-                out += '            <td><audio style="width: 100px;" controls="" preload="none"><source src="media/audio/real/n_speaker' + speaker_padded + '.wav"></audio></td>\n';
-                out += '            <td><audio style="width: 100px;" controls="" preload="none"><source src="media/audio/reconstruction/n_speaker' + speaker_padded + '_reconstruction.wav"></audio></td>\n';
+                out += '            <td><audio controls="" preload="none"><source src="media/audio/real/n_speaker' + speaker_padded + '.wav"></audio></td>\n';
+                out += '            <td><audio controls="" preload="none"><source src="media/audio/reconstruction/n_speaker' + speaker_padded + '_reconstruction.wav"></audio></td>\n';
                 out += '        </tr>\n';
             }
             out += '    </table>'
