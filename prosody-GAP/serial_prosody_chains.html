@@ -1,0 +1,317 @@
+<html>
+<head>
+    <title>Serial prosody chain visualization</title>
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans", roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", sans-serif;
+        }
+
+        .text {
+            font-size: 1.7px;
+            fill: white;
+            transform: translate(-0.7px, 0.5px);
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                                             supported by Chrome, Edge, Opera and Firefox */
+            pointer-events: none;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .node {
+            stroke: none;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 0.5px;
+        }
+
+        .experiment {
+            display: none;
+        }
+
+        #overlay {
+            visibility: hidden;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            z-index: 1000;
+            background: #0000006e;
+        }
+
+        #overlay div {
+            background: white;
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            margin-left: 25%;
+            padding: 2em;
+        }
+
+        #sentences {
+            width: 250px;
+            float: right;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div id="overlay">
+    <div>
+        <h3>Visualization of experiment chains</h3>
+        <p>
+            Explore the stimuli created during the experiment. Each single chain represents a series of stimuli created
+            using serial reproduction. The color of the nodes represent the recorded sentence. The first node of each
+            network is the initial seed of the network. At each iteration the first two nodes on the left are stimuli
+            created at this iteration. The node on the right at each iteration is the stimulus from the previous
+            iteration. <br><br>
+            Scroll in with your mouse to zoom into single networks. By hovering over a single node, you'll hear the
+            stimulus.
+        </p>
+        <button onclick="overlay()">Continue</button>
+    </div>
+</div>
+<div id="sentences">
+    <h3>Sentences</h3>
+</div>
+<div id="my_dataviz"></div>
+
+
+<script>
+    var data;
+    var sentences = [
+        "It's eight o'clock.",
+        "Is it eleven o'clock?",
+        "Let me tell you something.",
+        "That's exactly what happened.",
+        "I wonder what this is about.",
+        "I think I've seen this before.",
+        "We'll stop in a couple of minutes.",
+        "The surface is slick.",
+        "Help the woman get back to her feet.",
+        "What joy there is in living."
+    ]
+
+    function overlay() {
+        el = document.getElementById("overlay");
+        el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    }
+
+    d3.json("data.json").then(function (intial_data) {
+        data = intial_data;
+        var margin = {
+                top: 0,
+                right: 300,
+                bottom: 0,
+                left: 0
+            },
+            width = window.innerWidth - margin.right - margin.left,
+            height = window.innerHeight - margin.top - margin.bottom;
+        var y_scalar = 0.2;
+
+        var nowpending = '';
+        var player = document.createElement("audio");
+
+        function play(url) {
+            window.clearTimeout(nowpending);
+            player.controls = "controls";
+            player.src = url;
+            player.play();
+        }
+
+
+        function stringToHTML(str) {
+            var dom = document.createElement('div');
+            dom.innerHTML = str;
+            return dom;
+        }
+
+        sentences.forEach(function (sentence, idx) {
+            var elem = stringToHTML(
+                '<div><input type="checkbox" class="sentence" id="sentence' + idx + '" name="sentence' + idx + '" checked><label for="sentence' + idx + '">' + sentence + '</label></div>'
+            );
+            elem.addEventListener('click', function (e) {
+                if (document.getElementById('tree') !== null) {
+                    document.getElementById('tree').remove();
+                }
+                draw_tree();
+                console.log(e.srcElement.checked);
+            })
+            document.getElementById('sentences').append(elem)
+            //
+            console.log(sentence)
+            console.log(idx)
+        })
+
+        var draw_tree = function () {
+            var els = document.getElementsByClassName('sentence');
+            var selected_sentences = [];
+
+            Array.prototype.forEach.call(els, function (el, idx) {
+                if (el.checked) {
+                    selected_sentences.push(sentences[idx]);
+                }
+            });
+
+
+            var treeLayout = d3.tree()
+                .size([width, height])
+            var root = d3.hierarchy(data)
+
+            treeLayout(root)
+
+
+            var svg = d3.select("#my_dataviz")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr('id', 'tree')
+
+            var g = svg.append("g")
+                .attr("transform", "translate(5, 5)")
+
+            // Links
+            var links = g.append('g')
+                .selectAll('line.link')
+
+                .data(root.links())
+
+                .join('line')
+                //.classed('link', true)
+                .filter(function (d) {
+                    return selected_sentences.indexOf(d.source.data.sentence) !== -1
+                })
+                .attr('class', function (d) {
+                    return "link " + d.source.data.class;
+                })
+                .attr('x1', function (d) {
+                    return d.source.x;
+                })
+                .attr('y1', function (d) {
+                    return d.source.y * y_scalar;
+                })
+                .attr('x2', function (d) {
+                    return d.target.x;
+                })
+                .attr('y2', function (d) {
+                    return d.target.y * y_scalar;
+                });
+
+            // nodes
+            var nodes = g.append('g')
+                //.attr("class", "nodes")
+                .selectAll('circle.node')
+                .data(root.descendants())
+                .join('g')
+                .classed('node', true)
+                .filter(function (d) {
+                    return selected_sentences.indexOf(d.data.sentence) !== -1
+                })
+                .attr('cx', function (d) {
+                    return d.x;
+                })
+                .attr('cy', function (d) {
+                    return d.y * y_scalar;
+                })
+
+            nodes.append("circle")
+                .attr("cx", function (d) {
+                    return d.x;
+                })
+                .attr("cy", function (d) {
+                    return d.y * y_scalar;
+                })
+                .attr('url', function (d) {
+                    return d.data.url;
+                })
+                .style('fill', function (d) {
+                    var color = d3.hcl(d3.color(d3.schemeCategory10[d.data.sentence_idx]));
+                    if (color !== null) {
+
+                        if (d.data.chosen) {
+                            color.l = color.l * 0.1;
+                        }
+                        return color.rgb() + "";
+                    }
+                })
+                .on('mouseover', function (p) {
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                        .attr('r', function (d) {
+                            return 3;
+                        })
+                    play(d3.select(this).attr("url"));
+
+                })
+                .on('mouseout', function (p) {
+                    d3.select(this)
+                        .transition()
+                        .duration(50)
+                        .attr('r', function (d) {
+                            return 1;
+                        })
+                })
+                .attr('class', function (d) {
+                    return "nodes " + d.data.class;
+                })
+                .attr('r', 1);
+
+            // Add text
+            nodes.append("text") // returns a selection of text, newly append to each g in node
+                .text(function (d) {
+                    return d.data.label;
+                })
+                .attr("x", function (d) {
+                    return d.x;
+                })
+                .attr("y", function (d) {
+                    return d.y * y_scalar;
+                })
+                .attr('class', function (d) {
+                    return 'text ' + d.data.class;
+                })
+                .attr("dy", "0em");
+
+            // Zooming behaviour
+            function handleZoom(e) {
+                d3.select('svg g')
+                    .attr('transform', e.transform);
+            }
+
+            let zoom = d3.zoom()
+                .on('zoom', handleZoom);
+
+            d3.select('svg')
+                .call(zoom);
+
+        }
+
+        draw_tree();
+
+
+        overlay();
+    });
+
+
+</script>
+
+
+</body>
+</html>

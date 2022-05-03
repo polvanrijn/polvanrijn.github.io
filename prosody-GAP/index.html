@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Supplementary material from "Bridging the prosody GAP"</title>
+    <link href="style.css" rel="stylesheet">
+
+</head>
+
+<body>
+<style>
+    body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans", roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", sans-serif;
+        }
+    iframe {
+        width: calc(100% - 12em);
+        min-height: 30vw;
+        border: 1px solid #aaa;
+        margin: 0 6em
+    }
+</style>
+<article>
+    <header>
+        <h1>Supplementary material from "Bridging the prosody GAP: Genetic Algorithm with People to efficiently sample emotional prosody"</h1>
+    </header>
+</article>
+
+<div><b>Abstract:</b> Existing emotional speech corpora are often either highly curated to induce certain emotions from
+    predefined categories, or it is difficult to dissect whether the judgment made by the annotators arise from semantic
+    or prosodic cues. To overcome this challenge, we propose a new approach called `Genetic Algorithm with People’
+    (GAP), which integrates human decision and production into a genetic algorithm. In our design, we allow human
+    creators and raters to synchronously optimize the emotional prosody over each generation by introducing evolutionary
+    pressure. We then compare GAP with state-of-the-art emotional speech corpora to examine its robustness. We
+    demonstrate that GAP is able to efficiently sample from the high dimensional emotion speech space and capture wide
+    variety of emotions, with no presumptions about the dimensionality of the space. Our approach has great potential to
+    scale and extend to other languages, which will allow for creating multilingual corpora to make cross-cultural
+    comparisons.
+</div>
+
+<p class="toc_title">Contents</p>
+<div id="toc_container">
+    <ul>
+        <li><a href="#chains">Supplementary figures</a></li>
+        <ol>
+            <li><a href="#chains.sentences">Used sentences in experiment</a></li>
+            <li><a href="#chains.visualization">Chain visualization</a></li>
+        </ol>
+    </ul>
+</div>
+
+<p>&nbsp;</p>
+
+<div>
+    <a name="chains"><h2>Supplementary figures</h2></a>
+    <a name="chains.sentences"><h3>Used sentences in experiment</h3></a>
+    <ul>
+        <li>It's eight o'clock. (inspired by Crema-D and Juslin & Laukka 2001)</li>
+        <li>Is it eleven o'clock? (inspired by Crema-D and Juslin & Laukka 2001)</li>
+        <li>Let me tell you something. (taken from VENEC)</li>
+        <li>That's exactly what happened. (taken from VENEC)</li>
+        <li>I wonder what this is about. (taken from Crema-D)</li>
+        <li>I think I've seen this before. (taken from Crema-D)</li>
+        <li>We'll stop in a couple of minutes. (taken from Crema-D)</li>
+        <li>The surface is slick. (taken from Crema-D)</li>
+        <li>Help the woman get back to her feet. (taken from Harvard sentences)</li>
+        <li>What joy there is in living. (taken from Harvard sentences)</li>
+    </ul>
+    <a name="chains.visualization"><h3>Chain visualization</h3></a>
+    <iframe src="serial_prosody_chains.html"></iframe>
+    <div class="h3_explainer"><i>Figure S1: Interactive visualization of the created chains. Follow the instructions on
+        the prompt.</i>
+    </div>
+
+
+</div>
+</body>
+</html>
