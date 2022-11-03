@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>International Keyboards Demo</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+<link rel="stylesheet" href="international-keyboards.css"/>
+<script
+        src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="international-keyboards.js"></script>
+<body>
+
+<select id="keyboardIDs" data-live-search="true"></select>
+
+<select id="keyboardType" class="selectpicker">
+    <option value="ANSI" selected>ANSI</option>
+    <option value="ISO">ISO</option>
+    <option value="JIS">Japanese</option>
+</select>
+
+<select id="cssStyle" class="selectpicker">
+    <option value="inverted" selected>Minimal</option>
+    <option value="default">Black and white</option>
+    <option value="apple">Apple</option>
+</select>
+
+<div id="keyboard"></div>
+
+<script>
+    var keyboard,
+            keyboardIDs = $('#keyboardIDs');
+    $.getJSON('https://raw.githubusercontent.com/polvanrijn/international-keyboards/main/default-keyboard-layout.json').done(function (default_layouts) {
+        for (const [iso, config] of Object.entries(default_layouts)) {
+            var group = '<optgroup label="' + config['label'] + '">';
+            config['variants'].forEach(function (variant) {
+                group += '<option addLatinKeys="' + config['addLatinKeys'] + '" keyVariant="' + config['keyVariant'] + '" type="' + variant['type'] + '" value="' + variant['name'] + '">' + '<img class="icon" src="icons/' + config['label'] + '/' + variant['name'] + '.png"> ' + variant['name'] + '</option>';
+            });
+            group = group + "<optgroup>";
+            keyboardIDs.append($(group))
+        }
+
+        keyboardIDs.selectpicker()
+        $('#type').selectpicker()
+
+        create_keyboard = async function (auto_correct_type = true) {
+            $('#keyboard').empty();
+            var keyboardID = keyboardIDs.val();
+            var fallback_type = $('#keyboardType').val();
+            var keyboardType = fallback_type;
+            var currentKeyboard = $('#keyboardIDs').find('[value="' + keyboardID + '"]')[0];
+            var addLatinKeys = currentKeyboard.getAttribute('addLatinKeys') === 'true';
+            var keyVariant = currentKeyboard.getAttribute('keyVariant');
+            if (auto_correct_type) {
+                if (keyboardType !== null) {
+                    keyboardType = currentKeyboard.getAttribute('type');
+                    $('#keyboardType').val(keyboardType);
+                    $('.selectpicker').selectpicker('render');
+                } else {
+                    keyboardType = fallback_type;
+                }
+            }
+            var cssStyle = $('#cssStyle').val();
+
+            keyboard = new InternationalKeyboard({
+                keyboardID: keyboardID,
+                containerID: 'keyboard',
+                addLatinKeys: addLatinKeys,
+                keyboardType: keyboardType,
+                cssStyle: cssStyle,
+                // showKeys: ['KeyA', 'KeyL'],
+                keyVariant: keyVariant,
+            });
+        }
+        $('select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            create_keyboard();
+        });
+
+        create_keyboard(false)
+    })
+
+</script>
+
+</body>
+</html>
