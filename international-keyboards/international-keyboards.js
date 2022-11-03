@@ -110,7 +110,7 @@ const CSS_STYLES = ['inverted', 'default', 'apple'];
             });
             await $.ajax({
                 dataType: "json",
-                url: 'json/' + keyboardID + '.json',
+                url: 'https://raw.githubusercontent.com/polvanrijn/international-keyboards/main/json/' + encodeURIComponent(keyboardID) + '.json',
                 success: function (data) {
                     for (const [key, value] of Object.entries(data)) {
                         var path = $('#' + key);
