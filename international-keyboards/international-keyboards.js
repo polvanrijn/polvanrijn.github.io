@@ -91,7 +91,7 @@ const CSS_STYLES = ['inverted', 'default', 'apple'];
 
         InternationalKeyboard.prototype.loadKeyboard = async function (keyboardType, containerID) {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "keyboards/" + keyboardType + ".svg", false);
+            xhr.open("GET", "https://raw.githubusercontent.com/polvanrijn/international-keyboards/main/keyboards/" + keyboardType + ".svg", false);
             // Following line is just to be on the safe side;
             // not needed if your server delivers SVG with correct MIME keyboardType
             xhr.overrideMimeType("image/svg+xml");
